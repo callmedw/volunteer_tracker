@@ -1,8 +1,24 @@
 class Project
-  attr_reader(:project_title)
+  attr_reader(:project_title, :id)
 
   define_method(:initialize) do |attributes|
     @project_title = attributes.fetch(:project_title)
+    @id = attributes.fetch(:id)
   end
 
+  define_method(:add) do
+    result = DB.exec("INSERT INTO projects (project_title) VALUES ('#{@project_title}') RETURNING id;")
+    @id = result.first().fetch("id").to_i()
+  end
+
+  define_singleton_method(:all) do
+    returned_projects = DB.exec("SELECT * FROM projects;")
+    projects = []
+    returned_projects.each() do |project|
+      project_title = project.fetch("project_title")
+      id = project.fetch("id").to_i()
+      projects.push(Project.new({:project_title => project_title, :id => id}))
+    end
+    projects
+  end
 end
