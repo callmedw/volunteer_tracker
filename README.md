@@ -42,7 +42,6 @@ With this application a user will be able to view, add, update, and delete proje
 * \c volunteer_tracker
 * CREATE TABLE "projects" ("id"  SERIAL, "project_title" VARCHAR, PRIMARY KEY ("id"));
 * CREATE TABLE "volunteers" ("id"  SERIAL, "volunteer_name" VARCHAR, "project_id" INTEGER, PRIMARY KEY ("id"));
-* ALTER TABLE "volunteers" ADD FOREIGN KEY ("project_id") REFERENCES "projects" ("id");
 
 You may also want to create a test database that mirrors the actual database for running tests as you build your program.
 To do that type the following statement in psql.
