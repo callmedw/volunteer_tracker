@@ -47,4 +47,14 @@ class Project
     DB.exec("DELETE FROM volunteers WHERE project_id = #{self.id()};")
   end
 
+  define_method(:volunteers) do |id|
+    found_volunteers = []
+    Volunteer.all().each() do |volunteer|
+      if volunteer.project_id().==(id)
+        found_volunteers.push(volunteer)
+      end
+    end
+    found_volunteers
+  end
+
 end

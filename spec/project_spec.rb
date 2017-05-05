@@ -67,6 +67,27 @@ describe(Project) do
       project.delete()
       expect(Project.all()).to(eq([project2]))
     end
+    it('removes a volunteer from a project in database') do
+      project = Project.new({:project_title => 'Dog Walking', :id => nil})
+      project.add()
+      volunteer = Volunteer.new({:name => 'Yoshi', :project_id => project.id()})
+      volunteer.add()
+      volunteer2 = Volunteer.new({:name => 'Maggie', :project_id => project.id()})
+      volunteer2.add()
+      project.delete()
+      expect(Volunteer.all()).to(eq([]))
+    end
   end
 
+  describe('#volunteers') do
+    it('returns an array of volunteers for that project') do
+      project = Project.new({:project_title => 'Dog Walking', :id => nil})
+      project.add()
+      volunteer = Volunteer.new({:name => 'Yoshi', :project_id => project.id()})
+      volunteer.add()
+      volunteer2 = Volunteer.new({:name => 'Maggie', :project_id => project.id()})
+      volunteer2.add()
+      expect(project.volunteers(project.id())).to(eq([volunteer, volunteer2]))
+    end
+  end
 end
