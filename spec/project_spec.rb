@@ -49,5 +49,24 @@ describe(Project) do
     end
   end
 
+  describe('#update') do
+    it('updates the title of a project in the database') do
+      project = Project.new({:project_title => 'Dog Walking', :id => nil})
+      project.add()
+      project.update({:project_title => 'Dog Washing'})
+      expect(project.project_title()).to(eq('Dog Washing'))
+    end
+  end
+
+  describe('#delete') do
+    it('removes a project from the database') do
+      project = Project.new({:project_title => 'Dog Walking', :id => nil})
+      project.add()
+      project2 = Project.new({:project_title => 'Car Wash', :id => nil})
+      project2.add()
+      project.delete()
+      expect(Project.all()).to(eq([project2]))
+    end
+  end
 
 end

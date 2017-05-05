@@ -36,4 +36,15 @@ class Project
     found_project
   end
 
+  define_method(:update) do |attributes|
+    @project_title = attributes.fetch(:project_title)
+    @id = self.id()
+    DB.exec("UPDATE projects SET project_title = '#{@project_title}' WHERE id = #{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM projects WHERE id = #{self.id()};")
+    DB.exec("DELETE FROM volunteers WHERE project_id = #{self.id()};")
+  end
+
 end
