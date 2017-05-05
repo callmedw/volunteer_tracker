@@ -31,6 +31,14 @@ describe(Project) do
     end
   end
 
+  describe('#==') do
+    it('is the same project if it has the same name and id') do
+      project1 = Project.new(:project_title => 'Dog Walking', :id => nil)
+      project2 = Project.new(:project_title => 'Dog Walking', :id => nil)
+      expect(project1).to(eq(project2))
+    end
+  end
+
 
 
 end

@@ -21,4 +21,8 @@ class Project
     end
     projects
   end
+
+  define_method(:==) do |another_project|
+    self.project_title().==(another_project.project_title()).&(self.id().==(another_project.id()))
+  end
 end
