@@ -39,6 +39,15 @@ describe(Project) do
     end
   end
 
+  describe('.find') do
+    it('returns a project by its ID') do
+      project = Project.new({:project_title => 'Dog Walking', :id => nil})
+      project.add
+      project2 = Project.new({:project_title => 'Car Wash', :id => nil})
+      project2.add
+      expect(Project.find(project2.id())).to(eq(project2))
+    end
+  end
 
 
 end

@@ -25,4 +25,15 @@ class Project
   define_method(:==) do |another_project|
     self.project_title().==(another_project.project_title()).&(self.id().==(another_project.id()))
   end
+
+  define_singleton_method(:find) do |id|
+    found_project = nil
+    Project.all().each() do |project|
+      if project.id() == id
+        found_project = project
+      end
+    end
+    found_project
+  end
+
 end
