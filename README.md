@@ -30,7 +30,7 @@ With this application a user will be able to view, add, update, and delete proje
 - [ ] Open files in atom or text editor of your choice
 - [ ] Open in a browser of your choice
 
-## Database Setup instructions
+## Database Setup Instructions
 
 - [ ] Install PG gem by typing "gem install pg" in to your terminal.
 - [ ] Type "bundle" in to your terminal.
@@ -58,8 +58,7 @@ now you may delete the test database and then recreate it by typing:
 * DROP DATABASE volunteer_tracker_test;
 * CREATE DATABASE volunteer_tracker_test WITH TEMPLATE volunteer_tracker;
 
-for other instructions on how to navigate psql visit the documentation here: https://www.postgresql.org/docs/9.3/static/datatype.html#DATATYPE-TABLE
-
+for other instructions on how to navigate psql visit the documentation here: https://www.postgresql.org/
 
 ## Known Bugs
 
@@ -71,7 +70,7 @@ This application is unsupported.
 
 ## Technologies Used
 
-HTML, CSS, Ruby, Git
+HTML, CSS, Ruby, Git, Postgresql, Sinatra, Capybara, Rspec
 
 ### License
 
