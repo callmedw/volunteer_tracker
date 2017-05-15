@@ -1,29 +1,61 @@
+<div class="index_header">
+  <h1>Volunteer Hub</h1>
+</div>
 
-<h3> Current Projects: </h3>
+<div class="page_header">
+  <h1>Projects</h1>
+</div>
+
 <br>
-<% if @projects.any?() %>
-<p>Click on a project to see its volunteers:</p>
 
-<ul>
-  <% @projects.each do |project| %>
-  <li><a href="/projects/<%= project.id() %>"><%= project.project_title() %></a></li>
+<div class="page_content">
+  <% if @projects.any? %>
+  <p>Click a project to edit the project or see which volunteers are assigned to the project</p>
+  <ul>
+    <% @projects.each do |project| %>
+      <li><a href = "/project/<%= project.id %>"><%= project.project_title %></a></li>
+    <% end %>
+  </ul>
+
+  <%else %>
+    <div class="alert alert-danger">
+      <strong>Sorry!</strong> There aren't any active projects right now.
+    </div>
   <% end %>
-</ul>
-<% else %>
-<p>There are no projects yet!</p>
-<% end %>
 
-<p>Create a new project:</p>
+<br>
 
-<form action="/projects" method="post">
-  <label for="project_title">Assign a name to your project:</label>
-  <br>
-  <input id="project_title" name="name" type="text">
-  <br>
-  <button type="submit">Add project</button>
-</form>
+  <h3>Add a new project:</h3>
+  <form action="/projects" method="post">
+    <label for="project_title">Enter project title here:</label>
+    <input type="text" name="project_title">
 
-<h3> Add volunteers to a project:</h3>
+    <button type="submit">Add Project</button>
+  </form>
+</div>
+<br>
+<div class="page_header">
+  <h1>Volunteers</h1>
+</div>
+
+<br>
+
+<div class="page_content">
+  <% if @volunteers.any? %>
+  These are all of the active volunteers:
+  <ul>
+    <% @volunteers.each do |volunteer| %>
+      <li><a href = "/volunteer/<%= volunteer.id %>"><%= volunteer.volunteer_name %></a></li>
+    <% end %>
+  </ul>
+
+  <%else %>
+    <div class="alert alert-danger">
+      <strong>Sorry!</strong> There aren't any active volunteers right now.
+    </div>
+  <% end %>
+
+<h3> Add a volunteer:</h3>
 <br>
 <form action="/volunteers" method="post">
   <label for="project_id">Select a Project</label>

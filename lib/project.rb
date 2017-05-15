@@ -10,7 +10,7 @@ class Project
     self.project_title().==(another_project.project_title()).&(self.id().==(another_project.id()))
   end
 
-  define_method(:add) do
+  define_method(:save) do
     result = DB.exec("INSERT INTO projects (project_title) VALUES ('#{@project_title}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
@@ -47,14 +47,27 @@ class Project
     DB.exec("DELETE FROM projects WHERE id = #{self.id};")
   end
 
+
+
   define_method(:volunteers) do
-    found_volunteers = []
-    volunteer = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id};")
-    volunteer.each do |volunteer|
-      volunteer_name = volunteer.fetch('volunteer_name')
-      project_id = volunteer.fetch('project_id').to_i
-      found_volunteers.push(Volunteer.new({:volunteer_name => volunteer_name, :project_id => project_id}))
+  matching_volunteers = []
+  @id = self.id
+  volunteers = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id};")
+   volunteers.each do |volunteer|
+    matching_volunteers.push(volunteer)
+  end
+  matching_volunteers
+end
+
+  define_method(:volunteers) do
+    project_volunteers = []
+    results = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id};")
+    results.each do |result|
+      name = result.fetch('volunteer_name')
+      project_id = result.fetch('project_id').to_i
+      id = result.fetch('id').to_i
+      project_volunteers.push(Volunteer.new({:volunteer_name => name, :project_id => project_id, :id => id}))
     end
-    found_volunteers
+    project_volunteers
   end
 end

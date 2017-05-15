@@ -1,0 +1,39 @@
+<div class="page_header">
+  <h1>Volunteers</h1>
+</div>
+
+<br>
+
+<div class="page_content">
+  <% if @volunteers.any? %>
+  <p>Click a volunteer to edit the volunteer or see which volunteers are assigned to the volunteer</p>
+  <ul>
+    <% @volunteers.each do |volunteer| %>
+      <li><a href = "/volunteer/<%= volunteer.id %>"><%= volunteer.volunteer_name %></a></li>
+    <% end %>
+  </ul>
+
+  <%else %>
+    <div class="alert alert-danger">
+      <strong>Sorry!</strong> There aren't any active volunteers right now.
+    </div>
+  <% end %>
+
+<br>
+
+  <h3>Add a new volunteer:</h3>
+  <form action="/volunteers" method="post">
+    <label for="volunteer_name">Enter volunteer name here:</label>
+    <input type="text" name="volunteer_name">
+
+    <button type="submit">Add Volunteer</button>
+  </form>
+</div>
+
+<br>
+
+<div class="page_nav">
+  <a href="/volunteers">volunteers</a>
+  <a href="/">home</a>
+  <a href="/volunteers"/volunteers</a>
+</div>

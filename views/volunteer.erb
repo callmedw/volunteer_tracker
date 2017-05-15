@@ -1,0 +1,34 @@
+<div class="page_header">
+  <h1>Volunteer Management</h1>
+</div>
+
+<div class="page_content">
+  <h2> Update <%= @volunteer.volunteer_name %> </h2>
+
+  <br>
+
+  <h4> Update the name of this volunteer. </h4>
+  <form action ="/volunteer/<%= @volunteer.id%>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="name">Enter the new name:</label>
+    <input type="text" name="volunteer_name">
+    <button type ="submit">Update</button>
+  </form>
+
+  <br>
+
+  <h4> Delete this volunteer. </h4>
+  <form action="/volunteer/<%= @volunteer.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">Remove <%= @volunteer.volunteer_name %></button>
+  </form>
+
+</div>
+
+<br>
+
+<div class="page_nav">
+  <a href="/volunteers">volunteers</a>
+  <a href="/">home</a>
+  <a href="/projects">projects</a>
+</div>

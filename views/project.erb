@@ -1,0 +1,46 @@
+<div class="page_header">
+  <h1>Project Management</h1>
+</div>
+
+<div class="page_content">
+  <h2> Update <%= @project.project_title %> </h2>
+
+  <br>
+
+  <h4> Update the title of this project. </h4>
+  <form action ="/project/<%= @project.id%>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="title">Enter the new title:</label>
+    <input type="text" name="project_title">
+    <button type ="submit">Update</button>
+  </form>
+
+  <br>
+
+  <h4> Delete this project. </h4>
+  <form action="/project/<%= @project.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">Remove <%= @project.project_title %></button>
+  </form>
+
+  <br>
+  <br>
+
+  <h3> Volunteers assigned to <%= @project.project_title %>: </h3>
+  <ul>
+    <% @project.volunteers.each do |volunteer| %>
+      <li>  <%= volunteer.volunteer_name%> </li>
+    <% end %>
+  </ul>
+
+  <br>
+
+</div>
+
+<br>
+
+<div class="page_nav">
+  <a href="/projects">projects</a>
+  <a href="/">home</a>
+  <a href="/volunteers">volunteers</a>
+</div>
